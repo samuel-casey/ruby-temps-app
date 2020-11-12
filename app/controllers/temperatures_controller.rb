@@ -18,7 +18,7 @@ class TemperaturesController < ApplicationController
     @temperature = Temperature.new(temperature_params)
 
     if @temperature.save
-      render json: @temperature, status: :created, location: @temperature
+      render json: @temperature, status: :created, location: @temperatures
     else
       render json: @temperature.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class TemperaturesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def temperature_params
-      params.require(:temperature).permit(:average_high_f, :average_low_f)
+      params.require(:temperature).permit(:average_high_f, :average_low_f, :location_id)
     end
 end

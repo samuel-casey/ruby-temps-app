@@ -10,7 +10,8 @@ class LocationsController < ApplicationController
 
   # GET /locations/1
   def show
-    render json: @location
+    @temperatures = @location.temperatures
+    render(json: {location: @location, temperatures: @temperatures})
   end
 
   # POST /locations
