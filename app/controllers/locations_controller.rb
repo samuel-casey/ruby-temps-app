@@ -1,17 +1,17 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :update, :destroy]
+  before_action :set_location, only: [:show]
 
   # GET /locations
   def index
     @locations = Location.all
-
-    render json: @locations
+    render json: @locations.to_json(include: :temperatures)
   end
 
   # GET /locations/1
   def show
     @temperatures = @location.temperatures
-    render(json: {location: @location, temperatures: @temperatures})
+    # render(json: {location: @location, temperatures: @temperatures}) # renders location and temps separately
+    render json: @location.to_json(include: :temperatures)
   end
 
   private
